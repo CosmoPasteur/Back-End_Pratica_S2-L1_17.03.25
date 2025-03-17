@@ -3,14 +3,51 @@ package it.epicode.esercizio_1;
 import java.util.Scanner;
 
 public class Main {
+
+    public static int[] arrayCasuale() {
+        int[] array = new int[5];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = (int) (Math.random() * 10);
+        }
+        return array;
+    }
+
+    public static void stampaArray(int[] stampa) {
+        for (int i = 0; i < stampa.length; i++) {
+            System.out.print(stampa[i] + " ");
+        }
+        System.out.println();
+    }
+
     public static void main(String[] args) {
+        // Creare un array di 5 elementi con valori casuali tra 0 e 10
+        int[] array = arrayCasuale();
+        // Stampare l'array
+        stampaArray(array);
+
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Inserisci un numero da 1 a 10 (0 per Terminare) : ");
-        int numeroInserito = scanner.nextInt();
-        System.out.println("Inserisci la posizione del numero inserito (tra 1 e 5) :");
-        int posizione = scanner.nextInt();
+        boolean richiedi = true;
 
-        System.out.println("Il numero inserito è " + numeroInserito + " e la sua posizione occupata è: " + posizione );
 
+        while (richiedi) {
+
+            System.out.println("-- Inserisci la posizione tra 1 e 5, 0 per uscire");
+            try {
+                int posizione = scanner.nextInt();
+
+                if (posizione == 0) {
+                    richiedi = false;
+                    break;
+                }
+                System.out.println("-- Inserisci il numero");
+                int numero = scanner.nextInt();
+                array[posizione - 1] = numero;
+                stampaArray(array);
+
+            } catch (Exception e) {
+                System.out.println("Non hai inserito valore corretto");
+                scanner.nextLine();
+            }
+        }
     }
 }
